@@ -21,14 +21,10 @@ import GoogleCloudBinaryauthorizationV1
 import GoogleCloudWkt
 import GoogleIamV1
 
-func sample(client: BinauthzManagementServiceV1Client, projectId: String, attestorId: String)
-  async throws
-{
-  let response = try await client.getAttestor(
-    request: GetAttestorRequest()
-      .with {
-        $0.name = "projects/\(projectId)/attestors/\(attestorId)"
-      }
+func sample(client: ValidationHelperV1Client) async throws {
+  let response = try await client.getIamPolicy(
+    request: GoogleIamV1.GetIamPolicyRequest()
+      /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
 }
@@ -38,8 +34,8 @@ func sample(client: BinauthzManagementServiceV1Client, projectId: String, attest
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudBinaryauthorizationV1.BinauthzManagementServiceV1Client()
-      try await sample(client: client, projectId: "[placeholder]", attestorId: "[placeholder]")
+      let client = try GoogleCloudBinaryauthorizationV1.ValidationHelperV1Client()
+      try await sample(client: client)
     } catch {
       print("Error: \(error)")
     }
