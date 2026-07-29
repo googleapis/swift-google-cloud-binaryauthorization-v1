@@ -23,10 +23,10 @@ import GoogleIAMV1
 import GoogleCloudGax
 
 extension Clients {
-  protocol SystemPolicyV1Stub {
-    func getSystemPolicy(
-      request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy
+  protocol ValidationHelperV1Stub {
+    func validateAttestationOccurrence(
+      request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse
 
     func setIamPolicy(
       request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
@@ -41,7 +41,7 @@ extension Clients {
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 
-  class SystemPolicyV1Transport: SystemPolicyV1Stub {
+  class ValidationHelperV1Transport: ValidationHelperV1Stub {
     let inner: GoogleCloudGax.HTTPClient
 
     public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
@@ -49,24 +49,26 @@ extension Clients {
         from: options, withDefaultEndpoint: "https://binaryauthorization.googleapis.com")
     }
 
-    public func getSystemPolicy(
-      request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
+    public func validateAttestationOccurrence(
+      request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse {
       let path = try { () throws -> Swift.String in
-        guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
-          throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
+        guard let pathVariable0 = request.attestor as Swift.String?, !pathVariable0.isEmpty else {
+          throw GoogleCloudGax.RequestError.binding("'request.attestor' is not set or is empty")
         }
-        return "/v1/\(pathVariable0)"
+        return "/v1/\(pathVariable0):validateAttestationOccurrence"
       }()
       let query = [
         URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
       ]
       var req = try await self.inner.Request(path: path, query: query)
-      req.httpMethod = "GET"
+      req.httpMethod = "POST"
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
+      req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      req.httpBody = try JSONEncoder().encode(request)
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleCloudBinaryauthorizationV1.Policy.self, from: data)
+        GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse.self, from: data)
     }
 
     public func setIamPolicy(

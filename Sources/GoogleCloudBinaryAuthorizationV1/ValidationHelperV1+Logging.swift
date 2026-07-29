@@ -59,14 +59,14 @@ extension Clients {
 
     public func validateAttestationOccurrence(
       request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "validateAttestationOccurrence",
         action: {
           (r: ValidateAttestationOccurrenceRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse
+            -> GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse
           in
           return try await self.inner.validateAttestationOccurrence(request: r, options: o)
         })

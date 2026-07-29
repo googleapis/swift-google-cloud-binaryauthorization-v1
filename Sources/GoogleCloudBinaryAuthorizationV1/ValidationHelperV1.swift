@@ -44,7 +44,7 @@ public class ValidationHelperV1Client: Clients.ValidationHelperV1Protocol {
   /// @Snippet(path: "ValidationHelperV1_ValidateAttestationOccurrence")
   public func validateAttestationOccurrence(
     request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse {
+  ) async throws -> GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse {
     try await self.inner.validateAttestationOccurrence(request: request, options: options)
   }
 
@@ -96,7 +96,7 @@ extension Clients {
   public protocol ValidationHelperV1Protocol {
     /// See `ValidationHelperV1Client.validateAttestationOccurrence`.
     func validateAttestationOccurrence(request: ValidateAttestationOccurrenceRequest) async throws
-      -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse
+      -> GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse
 
     /// See `ValidationHelperV1Client.setIamPolicy`.
     func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws -> GoogleIAMV1.Policy
@@ -111,7 +111,7 @@ extension Clients {
     /// See `ValidationHelperV1Client.validateAttestationOccurrence`.
     func validateAttestationOccurrence(
       request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse
 
     /// See `ValidationHelperV1Client.setIamPolicy`.
     func setIamPolicy(
@@ -133,14 +133,14 @@ extension Clients {
 // Default implementations
 extension Clients.ValidationHelperV1Protocol {
   public func validateAttestationOccurrence(request: ValidateAttestationOccurrenceRequest)
-    async throws -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse
+    async throws -> GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse
   {
     try await self.validateAttestationOccurrence(request: request, options: .init())
   }
 
   public func validateAttestationOccurrence(
     request: ValidateAttestationOccurrenceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudBinaryauthorizationV1.ValidateAttestationOccurrenceResponse {
+  ) async throws -> GoogleCloudBinaryAuthorizationV1.ValidateAttestationOccurrenceResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 

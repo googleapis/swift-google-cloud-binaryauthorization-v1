@@ -43,7 +43,7 @@ public class SystemPolicyV1Client: Clients.SystemPolicyV1Protocol {
   /// @Snippet(path: "SystemPolicyV1_GetSystemPolicy")
   public func getSystemPolicy(
     request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
+  ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
     try await self.inner.getSystemPolicy(request: request, options: options)
   }
 
@@ -95,12 +95,12 @@ extension Clients {
   public protocol SystemPolicyV1Protocol {
     /// See `SystemPolicyV1Client.getSystemPolicy`.
     func getSystemPolicy(request: GetSystemPolicyRequest) async throws
-      -> GoogleCloudBinaryauthorizationV1.Policy
+      -> GoogleCloudBinaryAuthorizationV1.Policy
 
     /// See `SystemPolicyV1Client.getSystemPolicy`.
     func getSystemPolicy(
       name: Swift.String,
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy
 
     /// See `SystemPolicyV1Client.setIamPolicy`.
     func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws -> GoogleIAMV1.Policy
@@ -115,7 +115,7 @@ extension Clients {
     /// See `SystemPolicyV1Client.getSystemPolicy`.
     func getSystemPolicy(
       request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy
 
     /// See `SystemPolicyV1Client.setIamPolicy`.
     func setIamPolicy(
@@ -137,20 +137,20 @@ extension Clients {
 // Default implementations
 extension Clients.SystemPolicyV1Protocol {
   public func getSystemPolicy(request: GetSystemPolicyRequest) async throws
-    -> GoogleCloudBinaryauthorizationV1.Policy
+    -> GoogleCloudBinaryAuthorizationV1.Policy
   {
     try await self.getSystemPolicy(request: request, options: .init())
   }
 
   public func getSystemPolicy(
     request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
+  ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func getSystemPolicy(
     name: Swift.String,
-  ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
+  ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
     let request = GetSystemPolicyRequest().with {
       $0.name = name
     }

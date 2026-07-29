@@ -51,14 +51,14 @@ extension Clients {
 
     public func getSystemPolicy(
       request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
           (r: GetSystemPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudBinaryauthorizationV1.Policy
+            -> GoogleCloudBinaryAuthorizationV1.Policy
           in
           return try await self.inner.getSystemPolicy(request: r, options: o)
         })

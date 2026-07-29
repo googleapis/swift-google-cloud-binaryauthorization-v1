@@ -26,27 +26,27 @@ extension Clients {
   protocol BinauthzManagementServiceV1Stub {
     func getPolicy(
       request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy
 
     func updatePolicy(
       request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy
 
     func createAttestor(
       request: CreateAttestorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Attestor
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor
 
     func getAttestor(
       request: GetAttestorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Attestor
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor
 
     func updateAttestor(
       request: UpdateAttestorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Attestor
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor
 
     func listAttestors(
       request: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.ListAttestorsResponse
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse
 
     func deleteAttestor(
       request: DeleteAttestorRequest, options: GoogleCloudGax.RequestOptions
@@ -75,7 +75,7 @@ extension Clients {
 
     public func getPolicy(
       request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -90,12 +90,12 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleCloudBinaryauthorizationV1.Policy.self, from: data)
+        GoogleCloudBinaryAuthorizationV1.Policy.self, from: data)
     }
 
     public func updatePolicy(
       request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.policy.map({ $0.name }), !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.policy.name' is not set or is empty")
@@ -114,12 +114,12 @@ extension Clients {
       }
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleCloudBinaryauthorizationV1.Policy.self, from: data)
+        GoogleCloudBinaryAuthorizationV1.Policy.self, from: data)
     }
 
     public func createAttestor(
       request: CreateAttestorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Attestor {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.parent as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -140,12 +140,12 @@ extension Clients {
       }
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleCloudBinaryauthorizationV1.Attestor.self, from: data)
+        GoogleCloudBinaryAuthorizationV1.Attestor.self, from: data)
     }
 
     public func getAttestor(
       request: GetAttestorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Attestor {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -160,12 +160,12 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleCloudBinaryauthorizationV1.Attestor.self, from: data)
+        GoogleCloudBinaryAuthorizationV1.Attestor.self, from: data)
     }
 
     public func updateAttestor(
       request: UpdateAttestorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Attestor {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.attestor.map({ $0.name }), !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding(
@@ -185,12 +185,12 @@ extension Clients {
       }
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleCloudBinaryauthorizationV1.Attestor.self, from: data)
+        GoogleCloudBinaryAuthorizationV1.Attestor.self, from: data)
     }
 
     public func listAttestors(
       request: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.ListAttestorsResponse {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.parent as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -208,7 +208,7 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleCloudBinaryauthorizationV1.ListAttestorsResponse.self, from: data)
+        GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse.self, from: data)
     }
 
     public func deleteAttestor(

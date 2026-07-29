@@ -21,45 +21,52 @@ import Foundation
 import GoogleCloudWkt
 import GoogleIAMV1
 import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
-  final class BinauthzManagementServiceV1Retry: BinauthzManagementServiceV1Stub {
+  final class BinauthzManagementServiceV1Logging: BinauthzManagementServiceV1Stub {
     let inner: any BinauthzManagementServiceV1Stub
-    let options: GoogleCloudGax.ClientOptions
+    let logger: Logger
 
-    public init(_ inner: any BinauthzManagementServiceV1Stub, options: GoogleCloudGax.ClientOptions)
-    {
+    public init(_ inner: any BinauthzManagementServiceV1Stub, logger: Logger) {
+      var logger = logger
+      logger[metadataKey: "gcp.artifact.id"] = "google-cloud-binaryauthorization-v1"
+      logger[metadataKey: "gcp.client.service"] = "binaryauthorization"
+      logger[metadataKey: "gcp.experimental.swift.client"] = "BinauthzManagementServiceV1"
       self.inner = inner
-      self.options = options
+      self.logger = logger
     }
 
     func _intercept<Input, Output>(
       request: Input,
       options: GoogleCloudGax.RequestOptions,
-      idempotent: Swift.Bool,
+      name: Swift.String,
       action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
-        options: options, withDefault: self.options, idempotent: idempotent,
-      )
-      let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
-        var attemptOptions = options
-        attemptOptions.attemptTimeout = attemptTimeout
-        return try await action(request, attemptOptions)
+      var logger = logger
+      logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
+      logger[metadataKey: "gcp.experimental.swift.method"] = .string(name)
+      logger.debug("enter  : \(request) \(options)")
+      do {
+        let output = try await action(request, options)
+        logger.debug("success: \(request) \(options) \(output)")
+        return output
+      } catch let error {
+        logger.debug("error  : \(request) \(options) \(error)")
+        throw error
       }
-      return try await loop.run(attempt: attempt)
     }
 
     public func getPolicy(
       request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "getPolicy",
         action: {
           (r: GetPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudBinaryauthorizationV1.Policy
+            -> GoogleCloudBinaryAuthorizationV1.Policy
           in
           return try await self.inner.getPolicy(request: r, options: o)
         })
@@ -67,14 +74,14 @@ extension Clients {
 
     public func updatePolicy(
       request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Policy {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "updatePolicy",
         action: {
           (r: UpdatePolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudBinaryauthorizationV1.Policy
+            -> GoogleCloudBinaryAuthorizationV1.Policy
           in
           return try await self.inner.updatePolicy(request: r, options: o)
         })
@@ -82,14 +89,14 @@ extension Clients {
 
     public func createAttestor(
       request: CreateAttestorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Attestor {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "createAttestor",
         action: {
           (r: CreateAttestorRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudBinaryauthorizationV1.Attestor
+            -> GoogleCloudBinaryAuthorizationV1.Attestor
           in
           return try await self.inner.createAttestor(request: r, options: o)
         })
@@ -97,14 +104,14 @@ extension Clients {
 
     public func getAttestor(
       request: GetAttestorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Attestor {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "getAttestor",
         action: {
           (r: GetAttestorRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudBinaryauthorizationV1.Attestor
+            -> GoogleCloudBinaryAuthorizationV1.Attestor
           in
           return try await self.inner.getAttestor(request: r, options: o)
         })
@@ -112,14 +119,14 @@ extension Clients {
 
     public func updateAttestor(
       request: UpdateAttestorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.Attestor {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "updateAttestor",
         action: {
           (r: UpdateAttestorRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudBinaryauthorizationV1.Attestor
+            -> GoogleCloudBinaryAuthorizationV1.Attestor
           in
           return try await self.inner.updateAttestor(request: r, options: o)
         })
@@ -127,14 +134,14 @@ extension Clients {
 
     public func listAttestors(
       request: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleCloudBinaryauthorizationV1.ListAttestorsResponse {
+    ) async throws -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "listAttestors",
         action: {
           (r: ListAttestorsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudBinaryauthorizationV1.ListAttestorsResponse
+            -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse
           in
           return try await self.inner.listAttestors(request: r, options: o)
         })
@@ -146,7 +153,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "deleteAttestor",
         action: {
           (r: DeleteAttestorRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteAttestor(request: r, options: o)
@@ -159,7 +166,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "setIamPolicy",
         action: {
           (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
@@ -174,7 +181,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "getIamPolicy",
         action: {
           (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
@@ -189,7 +196,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "testIamPermissions",
         action: {
           (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
